@@ -18,14 +18,14 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Please include all fields')
   }
 
-  // Validate password lenght
+  // Validate password length
 
-  if (password.lenght < 6) {
+  if (password.length < 6) {
     res.status(400)
     throw new Error('Your password needs to have more than 6 characters')
   }
 
-  if (password.lenght > 25) {
+  if (password.length > 25) {
     res.status(400)
     throw new Error('Your password needs to have less than 25 characters')
   }
@@ -45,22 +45,24 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   //* Validating methods
-  // if (user) {
-  //   res.status(201).json({
-  //     _id: user.id,
-  //     name: user.name,
-  //     email: user.email,
-  //   })
-  // }
   if (user) {
-    const { _id, name, email, photo, userAdmin } = user
     res.status(201).json({
-      _id,
-      name,
-      email,
-      photo,
-      userAdmin,
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      photo: user.photo,
+      userAdmin: user.userAdmin,
     })
+    // }
+    // if (user) {
+    //   const { _id, name, email, photo, userAdmin } = user
+    //   res.status(201).json({
+    //     _id,
+    //     name,
+    //     email,
+    //     photo,
+    //     userAdmin,
+    //   })
   } else {
     res.status(400)
     throw new Error('Invalid user Information')

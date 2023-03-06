@@ -24,13 +24,14 @@ const userSchema = mongoose.Schema({
   },
   photo: {
     type: String,
-    required: [true, 'PLease add a photo'],
-    //default: 'url image'
+    required: false,
+    default: 'url image',
   },
   userAdmin: {
     type: String,
-    required: [false, 'Please enter your job title'],
+    required: false,
     isAdmin: false,
+    default: 'Manager',
   },
 })
 
