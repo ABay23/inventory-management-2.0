@@ -27,13 +27,13 @@ const userSchema = mongoose.Schema({
     required: [true, 'PLease add a photo'],
     //default: 'url image'
   },
-  user: {
+  userAdmin: {
     type: String,
     required: [false, 'Please enter your job title'],
     isAdmin: false,
   },
 })
 
-const User = mongoose.Model('User', userSchema)
+const User = mongoose.model('User', userSchema)
 
 module.exports = User
