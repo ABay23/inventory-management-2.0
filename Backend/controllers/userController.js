@@ -38,31 +38,31 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   //* Create New User
-  const user = User.create({
+  const user = await User.create({
     name,
     email,
     password,
   })
 
   //* Validating methods
+  // if (user) {
+  //   res.status(201).json({
+  //     _id: user._id,
+  //     name: user.name,
+  //     email: user.email,
+  //     photo: user.photo,
+  //     // userAdmin: user.userAdmin,
+  //   })
+  //   // }
   if (user) {
+    const { _id, name, email, photo, userAdmin } = user
     res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      photo: user.photo,
-      userAdmin: user.userAdmin,
+      _id,
+      name,
+      email,
+      photo,
+      userAdmin,
     })
-    // }
-    // if (user) {
-    //   const { _id, name, email, photo, userAdmin } = user
-    //   res.status(201).json({
-    //     _id,
-    //     name,
-    //     email,
-    //     photo,
-    //     userAdmin,
-    //   })
   } else {
     res.status(400)
     throw new Error('Invalid user Information')

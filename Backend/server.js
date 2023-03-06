@@ -7,6 +7,10 @@ const colors = require('colors')
 const PORT = process.env.PORT || 5001
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/errorMiddleware')
+
+// Connect to the DB
+connectDB()
+
 const app = express()
 
 // Middleware
@@ -23,9 +27,6 @@ app.get('/', (req, res) => {
 
 // Error Handler
 app.use(errorHandler)
-
-// Connect to the DB
-connectDB()
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
