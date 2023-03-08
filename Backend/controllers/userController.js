@@ -3,6 +3,8 @@ const asyncHandler = require('express-async-handler')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
+const bcrypt = require('bcryptjs')
+const cookieParser = require('cookie-parser')
 
 // @desc    Register a new user
 // @route   /api/users
@@ -37,13 +39,28 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Te email already exists')
   }
 
+  //* Encrypt Password before saving into DB
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
+
   //* Create New User
   const user = await User.create({
     name,
     email,
-    password,
+    password: hashedPassword,
   })
 
+  //* Generate token
+  const token = generateToken(user._id)
+
+  //* Set HTTP-Only cookie
+  res.cookie('token', token, {
+    path: '/',
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 864000), //The equivalent to one day
+    sameSite: 'none',
+    secure: true,
+  })
   //* Validating methods
   // if (user) {
   //   res.status(201).json({
@@ -62,12 +79,19 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       photo,
       userAdmin,
+      token: token,
     })
   } else {
     res.status(400)
     throw new Error('Invalid user Information')
   }
 })
+
+//* Generate Token
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+}
 
 module.exports = {
   registerUser,

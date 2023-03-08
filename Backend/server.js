@@ -7,6 +7,7 @@ const colors = require('colors')
 const PORT = process.env.PORT || 5001
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/errorMiddleware')
+const cookieParser = require('cookie-parser')
 
 // Connect to the DB
 connectDB()
@@ -15,6 +16,7 @@ const app = express()
 
 // Middleware
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
