@@ -57,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
   res.cookie('token', token, {
     path: '/',
     httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 864000), //The equivalent to one day
+    expires: new Date(Date.now() + 1000 * 86400), //The equivalent to one day
     sameSite: 'none',
     secure: true,
   })
