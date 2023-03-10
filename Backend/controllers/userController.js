@@ -93,6 +93,44 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 }
 
+//* Login User
+
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body
+
+  //* Validate Request
+  if (!email || !password) {
+    res.status(400)
+    throw new Error('Invalid email and password information')
+  }
+
+  //* Find User
+  const user = await User.findOne({ email })
+
+  if (!user) {
+    res.status(400)
+    throw new Error('Invalid user, please signup')
+  }
+
+  const compPassword = await bcrypt.compare(password, user.password)
+
+  if (user && compPassword) {
+    const { _id, name, email, photo, userAdmin } = user
+    res.status(201).json({
+      _id,
+      name,
+      email,
+      photo,
+      userAdmin,
+      // token: token,
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid email or Password')
+  }
+})
+
 module.exports = {
   registerUser,
+  loginUser,
 }
