@@ -154,7 +154,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     expires: new Date(0), //* Expire the cookie
     sameSite: 'none',
-    secure: true,
+    secure: false,
   })
   res.status(200).json({ message: 'Successfully Logged out' })
 })
@@ -175,7 +175,24 @@ const getUser = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(400)
-    throw new Error('Invalid email or Password')
+    throw new Error('User not found')
+  }
+})
+
+//* Get login Status
+const loginStatus = asyncHandler(async (req, res) => {
+  const token = req.cookies.token
+
+  if (!token) {
+    return res.json(false)
+  }
+  //* Verify token
+  const verified = jwt.verify(token, process.env.JWT_SECRET)
+
+  if (verified) {
+    return res.json(true)
+  } else {
+    return res.json(false)
   }
 })
 
@@ -184,4 +201,5 @@ module.exports = {
   loginUser,
   logoutUser,
   getUser,
+  loginStatus,
 }

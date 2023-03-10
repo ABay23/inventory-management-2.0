@@ -8,7 +8,7 @@ const protect = asyncHandler(async (req, res, next) => {
     //* Validate token
     if (!token) {
       res.status(400)
-      throw new Error('Not authorized, please login')
+      throw new Error('Not authorized, please login (no token)')
     }
 
     //* Verify token
@@ -27,7 +27,8 @@ const protect = asyncHandler(async (req, res, next) => {
 
     next()
   } catch (error) {
-    res.status(400)
+    console.log(error)
+    res.status(401)
     throw new Error('Not authorized, please login (Catch)')
   }
 })
