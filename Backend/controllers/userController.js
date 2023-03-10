@@ -112,17 +112,66 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid user, please signup')
   }
 
+  //* Validate Password
   const compPassword = await bcrypt.compare(password, user.password)
+
+  //* Generate a new token after login
+  const token = generateToken(user._id)
+
+  //* Set HTTP-Only cookie
+
+  if (compPassword) {
+    res.cookie('token', token, {
+      path: '/',
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 86400), //The equivalent to one day
+      sameSite: 'none',
+      secure: true,
+    })
+  }
 
   if (user && compPassword) {
     const { _id, name, email, photo, userAdmin } = user
-    res.status(201).json({
+    res.status(200).json({
       _id,
       name,
       email,
       photo,
       userAdmin,
-      // token: token,
+      token,
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid email or Password')
+  }
+})
+
+//* Logout user
+
+const logoutUser = asyncHandler(async (req, res) => {
+  res.cookie('token', '', {
+    path: '/',
+    httpOnly: true,
+    expires: new Date(0), //* Expire the cookie
+    sameSite: 'none',
+    secure: true,
+  })
+  res.status(200).json({ message: 'Successfully Logged out' })
+})
+
+//* Get user Profile
+
+const getUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if (user) {
+    const { _id, name, email, photo, userAdmin } = user
+    res.status(200).json({
+      _id,
+      name,
+      email,
+      photo,
+      userAdmin,
     })
   } else {
     res.status(400)
@@ -133,4 +182,6 @@ const loginUser = asyncHandler(async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
+  getUser,
 }
