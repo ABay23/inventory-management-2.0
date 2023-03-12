@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 const bcrypt = require('bcryptjs')
 const cookieParser = require('cookie-parser')
+const Token = require('../models/tokenModel')
+const crypto = require('crypto')
+const emailSender = require('../utility/sendEmail')
 
 // @desc    Register a new user
 // @route   /api/users
@@ -253,7 +256,57 @@ const changePassword = asyncHandler(async (req, res) => {
 })
 
 const forgotPassword = asyncHandler(async (req, res) => {
-  res.send('Change Password')
+  const { email } = req.body
+  const user = await User.findOne({ email })
+
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+  //* Create reset token
+  let resetToken = crypto.randomBytes(32).toString('hex') + user._id
+
+  //* Hash token
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex')
+
+  //* Save token to DB
+  await new Token({
+    userId: user._id,
+    token: hashedToken,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 30 * (60 * 1000), // Multiply by 30 minutes
+  }).save()
+
+  //* Build Reset url
+  const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${hashedToken}`
+
+  //* Reset Email
+  const message = ` <h2>Hello ${user.name}</h2>
+  <p>You requested a password reset</p>
+  <p>Please use the link below to reset your pasword</p>
+  <p>This link would be valid only for the next 30 minutes</p>
+
+  <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+  <p>Regards...</p>
+  <p>Inventory team.</p>
+`
+  const subject = 'Password Reset'
+  const send_to = user.email
+  const send_from = process.env.EMAIL_USER
+
+  try {
+    await emailSender(subject, message, send_to, send_from)
+    res.status(200).json({ success: true, message: 'Reset Email Sent' })
+  } catch (error) {
+    res.status(500)
+    throw new Error('Email not sent, please try again.')
+  }
+
+  res.send('forgot Password')
 })
 
 module.exports = {
