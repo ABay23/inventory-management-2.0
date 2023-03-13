@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 5001
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/errorMiddleware')
 const cookieParser = require('cookie-parser')
+const userRoute = require('./routes/userRoutes')
+const productRoute = require('./routes/productRoutes')
 
 // Connect to the DB
 connectDB()
@@ -19,9 +21,11 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cors())
 
 // Routes
-app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/users', userRoute)
+app.use('/api/products', productRoute)
 
 app.get('/', (req, res) => {
   res.send('Home Page')

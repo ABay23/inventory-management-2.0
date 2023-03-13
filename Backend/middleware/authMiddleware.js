@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
+const dotenv = require('dotenv')
 
 const protect = asyncHandler(async (req, res, next) => {
   const token = req.cookies.token
