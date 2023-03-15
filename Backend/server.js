@@ -10,6 +10,7 @@ const errorHandler = require('./middleware/errorMiddleware')
 const cookieParser = require('cookie-parser')
 const userRoute = require('./routes/userRoutes')
 const productRoute = require('./routes/productRoutes')
+const path = require('path')
 
 // Connect to the DB
 connectDB()
@@ -22,6 +23,8 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // Routes
 app.use('/api/users', userRoute)
