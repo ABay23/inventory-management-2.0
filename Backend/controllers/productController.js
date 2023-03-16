@@ -57,7 +57,64 @@ const getProducts = asyncHandler(async (req, res) => {
   res.status(200).json(products).sort('-createdAt')
 })
 
+//*  Get Single Product
+const getProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id)
+
+  //* Validate product exist
+  if (!product) {
+    req.status(404)
+    throw new Error('Product not found')
+  }
+
+  //* Match Product  with user
+  if (product.user.toString() !== req.user.id) {
+    req.status(404)
+    throw new Error('User not found')
+  } else {
+    res.status(200).json(product)
+  }
+})
+
+//* Delete Single Product
+// const deleteProduct = asyncHandler(async (req, res) => {
+//   const product = await Product.findById(req.params.id)
+
+//   //* Validate product exist
+//   if (!product) {
+//     req.status(404)
+//     throw new Error('Product not found')
+//   }
+
+//   //* Match Product  with user
+//   if (product.user.toString() !== req.user.id) {
+//     req.status(401)
+//     throw new Error('User not found')
+//   }
+//   await product.remove()
+//   res.status(200).json({ message: 'Product Removed' })
+// })
+
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id)
+  // if product doesnt exist
+  if (!product) {
+    res.status(404)
+    throw new Error('Product not found')
+  }
+  // Match product to its user
+  if (product.user.toString() !== req.user.id) {
+    res.status(401)
+    throw new Error('User not authorized')
+  }
+
+  await product.remove()
+  // res.status(200).json({ message: 'Product deleted.' })
+})
+
 module.exports = {
   createProduct,
   getProducts,
+  getProduct,
+  deleteProduct,
 }
