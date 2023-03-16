@@ -19,12 +19,12 @@ const createProduct = asyncHandler(async (req, res) => {
       fileName: req.file.originalname,
       filePath: req.file.path,
       filetype: req.file.mimetype,
-      fileZise: fileSizeFormatter(req.file.size, 2),
+      fileSise: fileSizeFormatter(req.file.size, 2),
     }
   }
 
   const product = await Product.create({
-    user: req.user._id,
+    user: req.user.id,
     name,
     sku,
     category,

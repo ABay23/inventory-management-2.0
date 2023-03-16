@@ -3,7 +3,7 @@ const multer = require('multer')
 //* Define file Storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads')
+    cb(null, 'Backend/uploads')
   },
   filename: function (req, file, cb) {
     cb(
@@ -21,10 +21,10 @@ function fileFilter(req, file, cb) {
     file.mimetype === 'image/jpg'
   ) {
     // To reject this file pass `false`, like so:
-    cb(null, false)
+    cb(null, true)
   } else {
     // To accept the file pass `true`, like so:
-    cb(null, true)
+    cb(null, false)
   }
 }
 
