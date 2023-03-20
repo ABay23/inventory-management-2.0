@@ -239,6 +239,7 @@ const changePassword = asyncHandler(async (req, res) => {
   //* Validate Password
   if (!oldPassword || !password) {
     res.status(400)
+    console.log(`Actual Password: ${oldPassword} - New: ${password}`)
     throw new Error('Please add old and new password.')
   }
   //* Confirm password is correct
@@ -248,7 +249,7 @@ const changePassword = asyncHandler(async (req, res) => {
   if (user || confirmPassword) {
     user.password = req.body.pasword
 
-    const savePassword = await user.save()
+    await user.save()
     res.status(201).json({ message: 'Password Updated.' })
   } else {
     res.status(400)
@@ -283,7 +284,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }).save()
 
   //* Build Reset url
-  const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${hashedToken}`
+  const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`
 
   //* Reset Email
   const message = ` <h2>Hello ${user.name}</h2>
@@ -307,7 +308,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     throw new Error('Email not sent, please try again.')
   }
 
-  res.send('forgot Password')
+  // res.send('forgot Password')
 })
 
 module.exports = {
