@@ -9,6 +9,7 @@ const connectDB = require('./config/db')
 const errorHandler = require('./middleware/errorMiddleware')
 const cookieParser = require('cookie-parser')
 const userRoute = require('./routes/userRoutes')
+const contactRoute = require('./routes/contactRoutes')
 const productRoute = require('./routes/productRoutes')
 const path = require('path')
 
@@ -29,6 +30,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // Routes
 app.use('/api/users', userRoute)
 app.use('/api/products', productRoute)
+app.use('/api/contactus', contactRoute)
 
 app.get('/', (req, res) => {
   res.send('Home Page')
