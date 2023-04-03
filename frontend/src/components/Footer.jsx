@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-      <footer class='text-gray-600 body-font'>
+      <footer class='text-gray-600 body-font bg-blue-400'>
         <div class='container px-5 py-24 mx-auto'>
           <div class='flex flex-wrap md:text-left text-center order-first'>
             <div class='lg:w-1/4 md:w-1/2 w-full px-4'>
@@ -109,17 +109,17 @@ const Footer = () => {
               >
                 <path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'></path>
               </svg>
-              <span class='ml-3 text-xl'>Tailblocks</span>
+              <span class='ml-3 text-xl'>ABay23</span>
             </a>
             <p class='text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4'>
-              © 2020 Tailblocks —
+              © 2023 ABay —
               <a
                 href='https://twitter.com/knyttneve'
                 rel='noopener noreferrer'
                 class='text-gray-600 ml-1'
                 target='_blank'
               >
-                @knyttneve
+                @abay23
               </a>
             </p>
             <span class='inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start'>
