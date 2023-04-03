@@ -26,13 +26,20 @@ const Navbar = () => {
             <span class='ml-3 text-xl'>IMS</span>
           </a>
           <nav class='md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center'>
-            <Link to={'/'}>
-              {' '}
-              <a class='mr-5 hover:text-white'>Home</a>
-            </Link>
-            <a class='mr-5 hover:text-white'>Inventory</a>
-            <a class='mr-5 hover:text-white'>Third Link</a>
-            <a class='mr-5 hover:text-white'>Fourth Link</a>
+            <ul class='flex'>
+              <li class='mr-5 hover:text-white'>
+                <Link to={'/'}>Home</Link>
+              </li>
+              <li class='mr-5 hover:text-white'>
+                {' '}
+                <Link to={'/inventory'}>Inventory</Link>
+              </li>
+              <li class='mr-5 hover:text-white'>
+                {' '}
+                <Link to={'/product'}>New Product</Link>
+              </li>
+              <li class='mr-5 hover:text-white'>Third Link</li>
+            </ul>
           </nav>
           <div class='flex justify-center'>
             <Link to={'/login'}>
