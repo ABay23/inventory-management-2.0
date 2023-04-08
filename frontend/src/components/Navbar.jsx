@@ -38,7 +38,10 @@ const Navbar = () => {
                 {' '}
                 <Link to={'/product'}>New Product</Link>
               </li>
-              <li class='mr-5 hover:text-white'>Third Link</li>
+              <li class='mr-5 hover:text-white'>
+                {' '}
+                <Link to={'/dashboard'}>Dashboard</Link>
+              </li>
             </ul>
           </nav>
           <div class='flex justify-center'>

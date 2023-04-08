@@ -5,6 +5,7 @@ import Forgot from './pages/auth/Forgot'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Reset from './pages/auth/Reset'
+import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
 import Inventory from './pages/Inventory'
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path='/forgot' element={<Forgot />} />
             <Route path='/reset' element={<Reset />} />
             <Route path='/inventory' element={<Inventory />} />
+            <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/product' element={<AddProduct />} />
           </Routes>
         </Router>
