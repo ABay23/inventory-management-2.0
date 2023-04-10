@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const colors = require('colors')
-const PORT = process.env.PORT || 5001
+const PORT = process.env.PORT || 5002
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/errorMiddleware')
 const cookieParser = require('cookie-parser')
@@ -23,7 +23,14 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors())
+
+//* Validate credentials for Frontend and server
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  })
+)
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
