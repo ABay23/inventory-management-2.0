@@ -16,16 +16,15 @@ function App() {
         <div className='flex flex-col'>
           <Router>
             <Navbar />
-            <Sidebar />
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='/forgot' element={<Forgot />} />
               <Route path='/reset' element={<Reset />} />
-              <Route path='/inventory' element={<Inventory />} />
-              <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/product' element={<AddProduct />} />
+              <Route path='/inventory' element={[<Sidebar />, <Inventory />]} />
+              <Route path='/dashboard' element={[<Sidebar />, <Dashboard />]} />
+              <Route path='/product' element={[<Sidebar />, <AddProduct />]} />
             </Routes>
           </Router>
         </div>

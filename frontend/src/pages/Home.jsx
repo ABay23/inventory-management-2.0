@@ -9,7 +9,7 @@ const Home = () => {
             <h1 class='sm:text-3xl text-2xl font-medium title-font mb-2 text-white'>
               Pitchfork Kickstarter Taxidermy
             </h1>
-            <p class='lg:w-1/2 w-full leading-relaxed text-opacity-80 text-xl text-cyan-700'>
+            <p class='lg:w-2/3 w-full leading-relaxed text-opacity-80 text-3xl text-cyan-700'>
               Inventory Management System for the NY Aquarium
             </p>
           </div>
