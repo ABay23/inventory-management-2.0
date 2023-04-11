@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 //* Validate credentials for Frontend and server
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
   })
 )

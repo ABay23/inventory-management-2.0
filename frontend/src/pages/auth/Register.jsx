@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Card from '../../components/Card'
 import {
   registerUser,
   validateEmail,
 } from '../../components/services/authService'
+import { useDispatch } from 'react-redux'
+import {
+  SET_LOGIN,
+  SET_NAME,
+  SET_USER,
+} from '../../redux/features/auth/authSlice'
 
 const initialState = {
   name: '',
@@ -15,6 +21,8 @@ const initialState = {
 }
 
 function Register() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState(initialState)
 
@@ -61,7 +69,10 @@ function Register() {
 
     try {
       const data = await registerUser(userData)
-      console.log(data)
+      // console.log(data)
+      await dispatch(SET_LOGIN(true))
+      await dispatch(SET_NAME(data.name))
+      navigate('/dashboard')
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
