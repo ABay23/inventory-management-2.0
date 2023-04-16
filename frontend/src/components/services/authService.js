@@ -11,6 +11,7 @@ export const validateEmail = (email) => {
   )
 }
 
+//*  Register User
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(
@@ -20,6 +21,27 @@ export const registerUser = async (userData) => {
     )
     if (response.statusText === 'OK') {
       toast.success('User Created Successfully')
+    }
+    return response.data
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.message) ||
+      error.message ||
+      error.toString()
+    toast.error(message)
+  }
+}
+
+//*  Login User
+export const loginUser = async (userData) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/api/users/login`,
+      userData,
+      { withCredentials: true }
+    )
+    if (response.statusText === 'OK') {
+      toast.success('Login Successful')
     }
     return response.data
   } catch (error) {
