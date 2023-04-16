@@ -7,11 +7,7 @@ import {
   validateEmail,
 } from '../../components/services/authService'
 import { useDispatch } from 'react-redux'
-import {
-  SET_LOGIN,
-  SET_NAME,
-  SET_USER,
-} from '../../redux/features/auth/authSlice'
+import { SET_LOGIN, SET_NAME } from '../../redux/features/auth/authSlice'
 
 const initialState = {
   name: '',
@@ -69,7 +65,7 @@ function Register() {
 
     try {
       const data = await registerUser(userData)
-      // console.log(data)
+      console.log(data)
       await dispatch(SET_LOGIN(true))
       await dispatch(SET_NAME(data.name))
       navigate('/dashboard')
@@ -86,17 +82,14 @@ function Register() {
       <Card>
         <section className='bg-gray-50 dark:bg-blue-400'>
           <div className='flex flex-col mt-20 items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
-            <a
-              href='#'
-              className='flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white'
-            >
+            <Link className='flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white'>
               <img
                 className='w-8 h-8 mr-2'
                 src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg'
                 alt='logo'
               />
               BRAND GOES HERE
-            </a>
+            </Link>
             <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
               <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
                 <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
@@ -109,7 +102,7 @@ function Register() {
                 >
                   <div>
                     <label
-                      for='name'
+                      htmlFor='name'
                       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                     >
                       Your name
@@ -127,7 +120,7 @@ function Register() {
                   </div>
                   <div>
                     <label
-                      for='email'
+                      htmlFor='email'
                       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                     >
                       Your email
@@ -145,7 +138,7 @@ function Register() {
                   </div>
                   <div>
                     <label
-                      for='password'
+                      htmlFor='password'
                       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                     >
                       Password
@@ -163,7 +156,7 @@ function Register() {
                   </div>
                   <div>
                     <label
-                      for='password'
+                      htmlFor='password'
                       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                     >
                       Password
@@ -192,19 +185,19 @@ function Register() {
                       </div>
                       <div className='ml-3 text-sm'>
                         <label
-                          for='remember'
+                          htmlFor='remember'
                           className='text-gray-500 dark:text-gray-300'
                         >
                           Remember me
                         </label>
                       </div>
                     </div>
-                    <a
-                      href='#'
+                    <Link
                       className='text-sm font-medium text-blue-400 hover:underline dark:text-primary-500'
+                      to={'/forgot'}
                     >
-                      <Link to={'/forgot'}>Forgot password?</Link>
-                    </a>
+                      Forgot password?
+                    </Link>
                   </div>
                   <button
                     type='submit'
@@ -214,12 +207,12 @@ function Register() {
                   </button>
                   <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
                     Don’t have an account yet?{' '}
-                    <a
-                      href='#'
+                    <Link
                       className='font-medium text-blue-600 hover:underline dark:text-blue-500'
+                      to={'/register'}
                     >
-                      <Link to={'/register'}>Sign up</Link>
-                    </a>
+                      Sign up
+                    </Link>
                   </p>
                 </form>
               </div>
