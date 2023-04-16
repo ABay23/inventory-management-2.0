@@ -37,13 +37,27 @@ export const loginUser = async (userData) => {
   try {
     const response = await axios.post(
       `${BACKEND_URL}/api/users/login`,
-      userData,
-      { withCredentials: true }
+      userData
     )
     if (response.statusText === 'OK') {
       toast.success('Login Successful')
+      localStorage.setItem('user', JSON.stringify(response.data))
     }
     return response.data
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.message) ||
+      error.message ||
+      error.toString()
+    toast.error(message)
+  }
+}
+
+//*  Logout User
+export const logOutUser = async () => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/users/logout`)
+    localStorage.removeItem('user')
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.message) ||
