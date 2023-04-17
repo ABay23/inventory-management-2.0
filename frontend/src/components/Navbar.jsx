@@ -3,21 +3,17 @@ import { BsClipboardData } from 'react-icons/bs'
 import {
   SET_LOGIN,
   SET_LOGOUT,
-  selectIsLoggedIn,
-  selectUser,
+  selectName,
 } from '../redux/features/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from './services/authService'
 
 const Navbar = () => {
-  // const { user } = useSelector((state) => state.auth)
   const { isLoggedIn } = useSelector((state) => state.auth)
-  // const { user } = useSelector(selectUser)
-  // const { user } = useSelector(selectIsLoggedIn)
-  // const loggedIn = SET_LOGIN
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const name = useSelector(selectName)
 
   const logout = async () => {
     await logOutUser()
@@ -59,14 +55,17 @@ const Navbar = () => {
           </nav>
           <ul>
             {isLoggedIn ? (
-              <div className='flex justify-center'>
-                <button
-                  className='inline-flex items-center bg-blue-800 border-0 py-2 px-8 min-w-30 md:w-auto focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0 '
-                  onClick={logout}
-                >
-                  Logout
-                </button>
-              </div>
+              <>
+                <div>{name}</div>
+                <div className='flex justify-center'>
+                  <button
+                    className='inline-flex items-center bg-blue-800 border-0 py-2 px-8 min-w-30 md:w-auto focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0 '
+                    onClick={logout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
             ) : (
               <>
                 <div className='flex justify-center'>
