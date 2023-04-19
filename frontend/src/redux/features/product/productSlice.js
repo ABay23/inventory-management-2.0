@@ -13,7 +13,7 @@ const initialState = {
 
 //* create New Product
 
-const createProduct = createAsyncThunk(
+export const createProduct = createAsyncThunk(
   'products/create',
   async (formData, thunkAPI) => {
     try {
