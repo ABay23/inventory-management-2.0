@@ -2,7 +2,7 @@ import React from 'react'
 
 const ListedProducts = ({ products }) => {
   return (
-    <div className='mt-20 ml-30 z-10 sticky  container'>
+    <div className='mt-20 pl-72 z-10 sticky'>
       <hr />
       <div className=''>
         {products.lenght === 0 ? (
