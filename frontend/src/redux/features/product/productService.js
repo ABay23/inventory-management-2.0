@@ -12,7 +12,7 @@ const createProduct = async (formData) => {
 
 //* Get all Products
 
-const getAllProducts = async (formData) => {
+const getAllProducts = async () => {
   const response = await axios.get(API_URL)
   return response.data
 }

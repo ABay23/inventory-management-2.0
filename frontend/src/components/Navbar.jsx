@@ -1,10 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { BsClipboardData } from 'react-icons/bs'
-import {
-  SET_LOGIN,
-  SET_LOGOUT,
-  selectName,
-} from '../redux/features/auth/authSlice'
+import { SET_LOGIN, selectName } from '../redux/features/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from './services/authService'
 
@@ -18,13 +14,12 @@ const Navbar = () => {
   const logout = async () => {
     await logOutUser()
     await dispatch(SET_LOGIN(false))
-    dispatch(SET_LOGOUT(true))
     navigate('/')
     console.log(isLoggedIn)
   }
 
   return (
-    <div className='fixed top-0 z-50 w-full'>
+    <div className='fixed left-0 top-0 z-50 w-full'>
       <header className='text-gray-400 bg-gray-900 body-font'>
         <div className='container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center'>
           <Link className='flex title-font font-medium items-center text-white mb-4 md:mb-0'>

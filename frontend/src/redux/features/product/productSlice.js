@@ -31,8 +31,8 @@ export const createProduct = createAsyncThunk(
 
 //* Get All Products
 
-export const getProducts = createAsyncThunk(
-  'products/get',
+export const getAllProducts = createAsyncThunk(
+  'products/getAll',
   async (_, thunkAPI) => {
     try {
       return await productService.getAllProducts()
@@ -74,17 +74,17 @@ const productSlice = createSlice({
         state.message = action.payload
         toast.error(action.payload)
       })
-      .addCase(getProducts.pending, (state) => {
+      .addCase(getAllProducts.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getProducts.fulfilled, (state, action) => {
+      .addCase(getAllProducts.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.isError = false
         console.log(action.payload)
         state.products = action.payload
       })
-      .addCase(getProducts.rejected, (state, action) => {
+      .addCase(getAllProducts.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
