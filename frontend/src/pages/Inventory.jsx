@@ -23,8 +23,9 @@ const Inventory = () => {
   }, [isLoggedIn, isError, message, dispatch])
 
   return (
-    <div>
-      <h2>Inventory</h2>
+    <div className=' mt-40 pl-72 pr-5 z-10 static'>
+      <h2>Top KPIS</h2>
+
       <ListedProducts products={products} />
     </div>
   )
