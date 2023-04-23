@@ -3,14 +3,35 @@ import Search from './Search'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   FILTER_PRODUCTS,
-  selectFilteredProduct,
+  selectFilteredProducts,
 } from '../redux/features/product/filterSlice'
+
+import ReactPaginate from 'react-paginate'
 
 const ListedProducts = ({ products }) => {
   const [search, setSearch] = useState('')
-  const filteredProducts = useSelector(selectFilteredProduct)
+  const filteredProducts = useSelector(selectFilteredProducts)
 
   const dispatch = useDispatch()
+
+  //* Start Pagination
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 5
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage
+
+    setCurrentItems(filteredProducts.slice(itemOffset, endOffset))
+    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage))
+  }, [itemOffset, itemsPerPage, filteredProducts])
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filteredProducts.length
+    setItemOffset(newOffset)
+  }
+  //* End Pagination
 
   useEffect(() => {
     dispatch(FILTER_PRODUCTS({ products, search }))
@@ -30,7 +51,7 @@ const ListedProducts = ({ products }) => {
         </div>
       </span>
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-        {products.lenght === 0 ? (
+        {filteredProducts.lenght === 0 ? (
           <p className=' text-md text-blue-600'>No Products Found</p>
         ) : (
           <table className='w-full justify-items-center text-sm text-center text-gray-500 dark:text-gray-500'>
@@ -73,7 +94,6 @@ const ListedProducts = ({ products }) => {
                   >
                     <td className=' px-6 py-3'>{index + 1}</td>
                     <td className='px-6 py-3 '>
-                      {' '}
                       <img
                         src={image.filePath}
                         alt='pic'
@@ -104,6 +124,22 @@ const ListedProducts = ({ products }) => {
             </tbody>
           </table>
         )}
+      </div>
+      <div className=' ml-96 overflow-x-auto w-max align-middle'>
+        <ReactPaginate
+          breakLabel='...'
+          nextLabel='Next'
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel='Prev'
+          renderOnZeroPageCount={null}
+          containerClassName='inline-flex items-center -space-x-px '
+          pageLinkClassName='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          previousLinkClassName='block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          nextLinkClassName='page-block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          activeLinkClassName='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+        />
       </div>
     </div>
   )
