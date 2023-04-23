@@ -52,7 +52,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     CALC_STORE_VALUE(state, action) {
-      console.log('store value')
+      // console.log('store value')
     },
   },
   extraReducers: (builder) => {
@@ -63,14 +63,14 @@ const productSlice = createSlice({
       .addCase(createProduct.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        console.log(action.payload)
+        state.isError = false
+        // console.log(action.payload)
         state.products.push(action.payload)
         toast.success('Product Added Successfully')
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.isLoading = false
-        state.isSuccess = false
-        state.isError = false
+        state.isError = true
         state.message = action.payload
         toast.error(action.payload)
       })
@@ -81,7 +81,7 @@ const productSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.isError = false
-        console.log(action.payload)
+        // console.log(action.payload)
         state.products = action.payload
       })
       .addCase(getAllProducts.rejected, (state, action) => {
@@ -93,6 +93,6 @@ const productSlice = createSlice({
   },
 })
 
-export const {} = productSlice.actions
+export const { CALC_STORE_VALUE } = productSlice.actions
 
 export default productSlice.reducer

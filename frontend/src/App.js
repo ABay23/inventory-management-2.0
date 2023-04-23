@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
 import Inventory from './pages/Inventory'
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 axios.defaults.withCredentials = true

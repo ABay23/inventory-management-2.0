@@ -1,8 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Search from './Search'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  FILTER_PRODUCTS,
+  selectFilteredProduct,
+} from '../redux/features/product/filterSlice'
 
 const ListedProducts = ({ products }) => {
   const [search, setSearch] = useState('')
+  const filteredProducts = useSelector(selectFilteredProduct)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(FILTER_PRODUCTS({ products, search }))
+  }, [products, search, dispatch])
 
   return (
     <div
@@ -51,7 +63,7 @@ const ListedProducts = ({ products }) => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product, index) => {
+              {filteredProducts.map((product, index) => {
                 const { _id, name, image, category, price, quantity } = product
 
                 return (

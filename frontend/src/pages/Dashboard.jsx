@@ -1083,6 +1083,7 @@ const Dashboard = () => {
                   className='flex items-center text-blue-700 dark:text-gray-100'
                   href='https://tailwindcomponents.com/component/trello-panel-clone'
                   target='_blank'
+                  rel='noreferrer'
                 >
                   <svg
                     width='20'
@@ -1109,6 +1110,7 @@ const Dashboard = () => {
                   className='flex items-center text-blue-700 dark:text-gray-100'
                   href='https://windmill-dashboard.vercel.app/'
                   target='_blank'
+                  rel='noreferrer'
                 >
                   <svg
                     width='20'
@@ -1135,6 +1137,7 @@ const Dashboard = () => {
                   className='flex items-center text-blue-700 dark:text-gray-100'
                   href='https://demos.creative-tim.com/notus-js/pages/admin/dashboard.html'
                   target='_blank'
+                  rel='noreferrer'
                 >
                   <svg
                     width='20'
@@ -1161,6 +1164,7 @@ const Dashboard = () => {
                   className='flex items-center text-blue-700 dark:text-gray-100'
                   href='https://mosaic.cruip.com'
                   target='_blank'
+                  rel='noreferrer'
                 >
                   <svg
                     width='20'
