@@ -97,7 +97,7 @@ const ListedProducts = ({ products }) => {
                       <img
                         src={image.filePath}
                         alt='pic'
-                        className='object-contain h-15 w-20'
+                        className='object-contain h-14 w-20'
                       />
                     </td>
                     <th

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectIsLoggedIn } from '../redux/features/auth/authSlice'
 import { getAllProducts } from '../redux/features/product/productSlice'
 import ListedProducts from '../components/ListedProducts'
+import DashboardBox from '../components/dashboard/DashboardBox'
 
 const Inventory = () => {
   const dispatch = useDispatch()
@@ -12,19 +13,19 @@ const Inventory = () => {
   const { products, isError, message } = useSelector((state) => state.product)
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn === true) {
       dispatch(getAllProducts())
     }
-    // console.log(products)
+    console.log(isLoggedIn)
 
     if (isError) {
       console.log(message)
     }
-  }, [isLoggedIn, isError, message, dispatch])
+  }, [isError, isLoggedIn, message, dispatch])
 
   return (
     <div className=' mt-40 pl-72 pr-5 z-10 static'>
-      <h2>Top KPIS</h2>
+      <DashboardBox products={products} />
 
       <ListedProducts products={products} />
     </div>

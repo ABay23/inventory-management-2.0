@@ -4,11 +4,11 @@ const name = JSON.parse(localStorage.getItem('name'))
 const loggedIn = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
-  isLoggedIn: loggedIn ? loggedIn : false,
+  isLoggedIn: loggedIn ? true : false,
   name: name ? name : '',
   user: {
     name: '',
-    emaail: '',
+    email: '',
     phone: '',
     bio: '',
     photo: '',
@@ -41,7 +41,7 @@ const authSlice = createSlice({
   },
 })
 
-export const { SET_LOGIN, SET_NAME, SET_USER, SET_LOGOUT } = authSlice.actions
+export const { SET_LOGIN, SET_NAME, SET_USER } = authSlice.actions
 
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn
 export const selectName = (state) => state.auth.name
