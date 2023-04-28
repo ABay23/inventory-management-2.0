@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  CALC_INVENTORY_VALUE,
+  selectTotalInventoryValue,
+} from '../../redux/features/product/productSlice'
 
 const DashboardBox = ({ products }) => {
+  const dispatch = useDispatch()
+  const totalInventoryValue = useSelector(selectTotalInventoryValue)
+
+  useEffect(() => {
+    dispatch(CALC_INVENTORY_VALUE(products))
+  }, [dispatch, products])
+
   return (
     <div>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4'>
@@ -23,8 +35,11 @@ const DashboardBox = ({ products }) => {
             </svg>
           </div>
           <div className='text-right'>
-            <p className='text-2xl'>{products.length}</p>
-            <p>Items</p>
+            <p className='text-2xl'>
+              {'$'}
+              {totalInventoryValue}
+            </p>
+            <p>Inventory Value</p>
           </div>
         </div>
         <div className='bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group'>

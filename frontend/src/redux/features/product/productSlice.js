@@ -9,9 +9,8 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
-  totalStoreValue: 0,
-  category: '',
-  message: '',
+  inventoryValue: 0,
+  category: [],
 }
 
 //* create New Product
@@ -50,12 +49,57 @@ export const getAllProducts = createAsyncThunk(
   }
 )
 
+//* Delete a product
+
+export const deleteProduct = createAsyncThunk(
+  'products/delete',
+  async (id, thunkAPI) => {
+    try {
+      return await productService.deleteProduct(id)
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.response.message) ||
+        error.message ||
+        error.toString()
+      console.log(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    CALC_STORE_VALUE(state, action) {
-      // console.log('store value')
+    CALC_INVENTORY_VALUE(state, action) {
+      const product = action.payload
+      const array = []
+
+      product.map((item) => {
+        const { price, quantity } = item
+        const productValue = price * quantity
+
+        return array.push(productValue)
+      })
+      const totalValue = array.reduce((act, tot) => {
+        return tot + act
+      }, 0)
+      state.totalInventoryValue = totalValue
+    },
+    CALC_FOOD_VALUE(state, action) {
+      const product = action.payload
+      const array = []
+
+      product.filter((item) => {
+        const { price, quantity } = item
+        const productValue = price * quantity
+
+        return array.push(productValue)
+      })
+      const totalValue = array.reduce((act, tot) => {
+        return tot + act
+      }, 0)
+      state.totalInventoryValue = totalValue
     },
   },
   extraReducers: (builder) => {
@@ -93,9 +137,27 @@ const productSlice = createSlice({
         state.message = action.payload
         toast.error(action.payload)
       })
+      .addCase(deleteProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.isError = false
+        toast.success('Product Deleted!')
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        toast.error(action.payload)
+      })
   },
 })
 
-export const { CALC_STORE_VALUE } = productSlice.actions
+export const { CALC_INVENTORY_VALUE } = productSlice.actions
+
+export const selectTotalInventoryValue = (state) =>
+  state.product.totalInventoryValue
 
 export default productSlice.reducer

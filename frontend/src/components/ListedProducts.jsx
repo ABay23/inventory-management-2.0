@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import Search from './Search'
 import { useDispatch, useSelector } from 'react-redux'
+import { BsInfoCircleFill, BsPencil } from 'react-icons/bs'
+import { RiDeleteBin2Fill } from 'react-icons/ri'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+
 import {
   FILTER_PRODUCTS,
   selectFilteredProducts,
 } from '../redux/features/product/filterSlice'
 
 import ReactPaginate from 'react-paginate'
+import {
+  deleteProduct,
+  getAllProducts,
+} from '../redux/features/product/productSlice'
 
 const ListedProducts = ({ products }) => {
   const [search, setSearch] = useState('')
@@ -26,6 +35,30 @@ const ListedProducts = ({ products }) => {
     setCurrentItems(filteredProducts.slice(itemOffset, endOffset))
     setPageCount(Math.ceil(filteredProducts.length / itemsPerPage))
   }, [itemOffset, itemsPerPage, filteredProducts])
+
+  //* Delete Products
+
+  const delProduct = async (id) => {
+    await dispatch(deleteProduct(id))
+    await dispatch(getAllProducts())
+  }
+
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: 'Delete Product',
+      message: 'Are you sure you want to delete the Product?.',
+      buttons: [
+        {
+          label: 'Delete',
+          onClick: () => delProduct(id),
+        },
+        {
+          label: 'Cancel',
+          // onClick: () => alert('Click No'),
+        },
+      ],
+    })
+  }
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % filteredProducts.length
@@ -117,7 +150,14 @@ const ListedProducts = ({ products }) => {
                       {'$'}
                       {price * quantity}
                     </td>
-                    <td></td>
+                    <td className=' flex px-6 py-3 justify-evenly mt-5 items-center'>
+                      <BsInfoCircleFill className=' h-5 w-5 text-blue-500 cursor-pointer' />{' '}
+                      <BsPencil className=' h-5 w-5 text-grey-500 cursor-pointer' />{' '}
+                      <RiDeleteBin2Fill
+                        className=' h-6 w-6 text-red-500 cursor-pointer'
+                        onClick={() => confirmDelete(_id)}
+                      />
+                    </td>
                   </tr>
                 )
               })}
