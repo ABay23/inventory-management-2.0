@@ -9,6 +9,9 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  totalStoreValue: 0,
+  category: '',
+  message: '',
 }
 
 //* create New Product
