@@ -12,6 +12,7 @@ import Inventory from './pages/Inventory'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import ProductDetails from './components/ProductDetails'
 
 axios.defaults.withCredentials = true
 
@@ -32,6 +33,10 @@ function App() {
               <Route path='/inventory' element={[<Sidebar />, <Inventory />]} />
               <Route path='/dashboard' element={[<Sidebar />, <Dashboard />]} />
               <Route path='/product' element={[<Sidebar />, <AddProduct />]} />
+              <Route
+                path='/product-detail/:id'
+                element={[<Sidebar />, <ProductDetails />]}
+              />
             </Routes>
           </Router>
         </div>

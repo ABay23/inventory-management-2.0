@@ -76,7 +76,7 @@ const ListedProducts = ({ products }) => {
     >
       <hr />
       <span>
-        <h3>Inventory Items</h3>
+        <h3 className=' text-2xl text-blue-800  font-bold '>Inventory Items</h3>
       </span>
       <span>
         <div className=' relative h-20 w-50'>
