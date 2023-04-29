@@ -13,6 +13,7 @@ import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from './components/ProductDetails'
+import PrivateRoute from './components/services/PrivateRoute'
 
 axios.defaults.withCredentials = true
 
@@ -30,13 +31,36 @@ function App() {
               <Route path='/register' element={<Register />} />
               <Route path='/forgot' element={<Forgot />} />
               <Route path='/reset' element={<Reset />} />
-              <Route path='/inventory' element={[<Sidebar />, <Inventory />]} />
-              <Route path='/dashboard' element={[<Sidebar />, <Dashboard />]} />
-              <Route path='/product' element={[<Sidebar />, <AddProduct />]} />
-              <Route
+              <Route path='/inventory' element={<PrivateRoute />}>
+                <Route
+                  path='/inventory'
+                  element={[<Sidebar />, <Inventory />]}
+                />
+              </Route>
+              <Route path='/dashboard' element={<PrivateRoute />}>
+                <Route
+                  path='/dashboard'
+                  element={[<Sidebar />, <Dashboard />]}
+                />
+              </Route>
+              <Route path='/product' element={<PrivateRoute />}>
+                <Route
+                  path='/product'
+                  element={[<Sidebar />, <AddProduct />]}
+                />
+              </Route>
+              <Route path='/product-detail/:id' element={<PrivateRoute />}>
+                <Route
+                  path='/product-detail/:id'
+                  element={[<Sidebar />, <ProductDetails />]}
+                />
+              </Route>
+              {/* <Route path='/dashboard' element={[<Sidebar />, <Dashboard />]} /> */}
+              {/* <Route path='/product' element={[<Sidebar />, <AddProduct />]} /> */}
+              {/* <Route
                 path='/product-detail/:id'
                 element={[<Sidebar />, <ProductDetails />]}
-              />
+              /> */}
             </Routes>
           </Router>
         </div>

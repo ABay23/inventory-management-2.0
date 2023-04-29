@@ -16,7 +16,7 @@ const Inventory = () => {
     if (isLoggedIn === true) {
       dispatch(getAllProducts())
     }
-    console.log(isLoggedIn)
+    // console.log(isLoggedIn)
 
     if (isError) {
       console.log(message)

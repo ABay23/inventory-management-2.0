@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+// import { selectUser } from '../auth/authSlice'
 
 export const useAuthStatus = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [checkStatus, setCheckStatus] = useState(true)
+  const [xloggedIn, setXloggedIn] = useState(false)
+  // const [checkStatus, setCheckStatus] = useState(true)
 
-  const user = useSelector((state) => state.auth)
+  const { isLoggedIn } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    if (user) {
-      setLoggedIn(true)
+    if (isLoggedIn) {
+      setXloggedIn(true)
     } else {
-      setLoggedIn(false)
+      setXloggedIn(false)
     }
-    setCheckStatus(false)
-  }, [user])
+    // setCheckStatus(false)
+  }, [isLoggedIn])
 
-  return { loggedIn, checkStatus }
+  return { xloggedIn }
 }
