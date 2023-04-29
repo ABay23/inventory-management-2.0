@@ -31,10 +31,19 @@ const getProduct = async (id) => {
   return response.data
 }
 
+//* Get single Product
+
+const updateProduct = async (id, formData) => {
+  const response = await axios.patch(`${API_URL}${id}`, formData)
+  return response.data
+}
+
 const productService = {
   createProduct,
   getAllProducts,
   deleteProduct,
+  getProduct,
+  updateProduct,
 }
 
 export default productService
