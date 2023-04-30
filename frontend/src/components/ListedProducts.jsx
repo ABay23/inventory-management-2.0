@@ -16,6 +16,7 @@ import {
   deleteProduct,
   getAllProducts,
 } from '../redux/features/product/productSlice'
+import { Link } from 'react-router-dom'
 
 const ListedProducts = ({ products }) => {
   const [search, setSearch] = useState('')
@@ -151,7 +152,9 @@ const ListedProducts = ({ products }) => {
                       {price * quantity}
                     </td>
                     <td className=' flex px-6 py-3 justify-evenly mt-5 items-center'>
-                      <BsInfoCircleFill className=' h-5 w-5 text-blue-500 cursor-pointer' />{' '}
+                      <Link to={`/product-detail/${_id}`}>
+                        <BsInfoCircleFill className=' h-5 w-5 text-blue-500 cursor-pointer' />
+                      </Link>
                       <BsPencil className=' h-5 w-5 text-grey-500 cursor-pointer' />{' '}
                       <RiDeleteBin2Fill
                         className=' h-6 w-6 text-red-500 cursor-pointer'

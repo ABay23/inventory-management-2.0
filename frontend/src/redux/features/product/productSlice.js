@@ -225,5 +225,5 @@ export const { CALC_INVENTORY_VALUE } = productSlice.actions
 
 export const selectTotalInventoryValue = (state) =>
   state.product.totalInventoryValue
-
+export const selectProduct = (state) => state.product.product
 export default productSlice.reducer
