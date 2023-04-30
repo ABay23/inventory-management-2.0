@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from './components/ProductDetails'
 import PrivateRoute from './components/services/PrivateRoute'
+import EditProduct from './pages/EditProduct'
 
 axios.defaults.withCredentials = true
 
@@ -53,6 +54,12 @@ function App() {
                 <Route
                   path='/product-detail/:id'
                   element={[<Sidebar />, <ProductDetails />]}
+                />
+              </Route>
+              <Route path='/edit-product/:id' element={<PrivateRoute />}>
+                <Route
+                  path='/edit-product/:id'
+                  element={[<Sidebar />, <EditProduct />]}
                 />
               </Route>
               {/* <Route path='/dashboard' element={[<Sidebar />, <Dashboard />]} /> */}

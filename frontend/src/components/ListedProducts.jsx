@@ -155,7 +155,9 @@ const ListedProducts = ({ products }) => {
                       <Link to={`/product-detail/${_id}`}>
                         <BsInfoCircleFill className=' h-5 w-5 text-blue-500 cursor-pointer' />
                       </Link>
-                      <BsPencil className=' h-5 w-5 text-grey-500 cursor-pointer' />{' '}
+                      <Link to={`/edit-product/${_id}`}>
+                        <BsPencil className=' h-5 w-5 text-grey-500 cursor-pointer' />{' '}
+                      </Link>
                       <RiDeleteBin2Fill
                         className=' h-6 w-6 text-red-500 cursor-pointer'
                         onClick={() => confirmDelete(_id)}
