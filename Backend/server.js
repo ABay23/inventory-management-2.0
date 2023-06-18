@@ -13,9 +13,6 @@ const contactRoute = require('./routes/contactRoutes')
 const productRoute = require('./routes/productRoutes')
 const path = require('path')
 
-// Connect to the DB
-connectDB()
-
 const app = express()
 
 // Middleware
@@ -31,6 +28,27 @@ app.use(
     credentials: true,
   })
 )
+
+// check headers for cors and cookies in the browser console
+app.use((req, res, next) => {
+  const cookieHeader = req.headers.cookie
+  console.log('cookieHeader', cookieHeader)
+  res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL)
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+
+  next()
+})
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*')
+//   next()
+// })
+
+// app.options('*', cors())
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
@@ -49,3 +67,6 @@ app.use(errorHandler)
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
 })
+
+// Connect to the DB
+connectDB()

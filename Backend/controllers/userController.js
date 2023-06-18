@@ -60,20 +60,12 @@ const registerUser = asyncHandler(async (req, res) => {
   res.cookie('token', token, {
     path: '/',
     httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 86400), //The equivalent to one day
-    sameSite: 'none',
+    expires: new Date(Date.now() + 1000 * 1000 * 30 * 24 * 60 * 60), //The equivalent to one day
+    // SameSite: 'none',
+    sameSite: 'None',
     secure: true,
   })
-  //* Validating methods
-  // if (user) {
-  //   res.status(201).json({
-  //     _id: user._id,
-  //     name: user.name,
-  //     email: user.email,
-  //     photo: user.photo,
-  //     // userAdmin: user.userAdmin,
-  //   })
-  //   // }
+
   if (user) {
     const { _id, name, email, photo, userAdmin } = user
     res.status(201).json({
@@ -93,7 +85,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //* Generate Token
 
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' })
 }
 
 //* Login User
@@ -127,8 +119,8 @@ const loginUser = asyncHandler(async (req, res) => {
     res.cookie('token', token, {
       path: '/',
       httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 86400), //The equivalent to one day
-      sameSite: 'none',
+      expires: new Date(Date.now() + 1000 * 30 * 24 * 60 * 60), //The equivalent to 30 days
+      sameSite: 'None',
       secure: true,
     })
   }
@@ -156,8 +148,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     path: '/',
     httpOnly: true,
     expires: new Date(0), //* Expire the cookie
-    sameSite: 'none',
-    secure: false,
+    sameSite: 'None',
+    secure: true,
   })
   res.status(200).json({ message: 'Successfully Logged out' })
 })

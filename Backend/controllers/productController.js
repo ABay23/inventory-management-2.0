@@ -22,7 +22,10 @@ const createProduct = asyncHandler(async (req, res) => {
       uploadedFile = await cloudinary.uploader.upload(
         //* File Path
         req.file.path,
-        { folder: 'inventory-2.0', resource_type: 'image' }
+        {
+          folder: 'Inventory-Management-2.1',
+          resource_type: 'image',
+        }
       )
     } catch (error) {
       res.status(500)
@@ -53,8 +56,8 @@ const createProduct = asyncHandler(async (req, res) => {
 //* Get all Product
 
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({ user: req.user.id })
-  res.status(200).json(products).sort('-createdAt')
+  const products = await Product.find({ user: req.user.id }).sort('-createdAt')
+  res.status(200).json(products)
 })
 
 //*  Get Single Product
@@ -124,7 +127,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       uploadedFile = await cloudinary.uploader.upload(
         //* File Path
         req.file.path,
-        { folder: 'inventory-2.0', resource_type: 'image' }
+        { folder: 'Inventory-Management-2.1', resource_type: 'image' }
       )
     } catch (error) {
       res.status(500)
