@@ -15,62 +15,53 @@ import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from './components/ProductDetails'
 import PrivateRoute from './components/services/PrivateRoute'
 import EditProduct from './pages/EditProduct'
+import SidebarAction from './components/SidebarAction'
 
 axios.defaults.withCredentials = true
 
 function App() {
   return (
     <>
-      <div className='box-border'>
-        <div className='flex flex-col'>
-          <Router>
-            <ToastContainer />
-            <Navbar />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-              <Route path='/forgot' element={<Forgot />} />
-              <Route path='/reset' element={<Reset />} />
-              <Route path='/inventory' element={<PrivateRoute />}>
-                <Route
-                  path='/inventory'
-                  element={[<Sidebar />, <Inventory />]}
-                />
-              </Route>
-              <Route path='/dashboard' element={<PrivateRoute />}>
-                <Route
-                  path='/dashboard'
-                  element={[<Sidebar />, <Dashboard />]}
-                />
-              </Route>
-              <Route path='/product' element={<PrivateRoute />}>
-                <Route
-                  path='/product'
-                  element={[<Sidebar />, <AddProduct />]}
-                />
-              </Route>
-              <Route path='/product-detail/:id' element={<PrivateRoute />}>
-                <Route
-                  path='/product-detail/:id'
-                  element={[<Sidebar />, <ProductDetails />]}
-                />
-              </Route>
-              <Route path='/edit-product/:id' element={<PrivateRoute />}>
-                <Route
-                  path='/edit-product/:id'
-                  element={[<Sidebar />, <EditProduct />]}
-                />
-              </Route>
-              {/* <Route path='/dashboard' element={[<Sidebar />, <Dashboard />]} /> */}
-              {/* <Route path='/product' element={[<Sidebar />, <AddProduct />]} /> */}
-              {/* <Route
-                path='/product-detail/:id'
-                element={[<Sidebar />, <ProductDetails />]}
-              /> */}
-            </Routes>
-          </Router>
-        </div>
+      <div className='w-full h-full overflow-x-hidden overflow-y-auto'>
+        <Router>
+          <ToastContainer />
+          <Navbar />
+          <div className='  '>
+            <div className=' flex flex-col'>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/forgot' element={<Forgot />} />
+                <Route path='/reset' element={<Reset />} />
+              </Routes>
+            </div>
+          </div>
+          <div>
+            <div>
+              <Routes>
+                <Route path='/inventory' element={<PrivateRoute />}>
+                  <Route path='/inventory' element={<Inventory />} />
+                </Route>
+                <Route path='/dashboard' element={<PrivateRoute />}>
+                  <Route path='/dashboard' element={<Dashboard />} />
+                </Route>
+                <Route path='/product' element={<PrivateRoute />}>
+                  <Route path='/product' element={<AddProduct />} />
+                </Route>
+                <Route path='/product-detail/:id' element={<PrivateRoute />}>
+                  <Route
+                    path='/product-detail/:id'
+                    element={<ProductDetails />}
+                  />
+                </Route>
+                <Route path='/edit-product/:id' element={<PrivateRoute />}>
+                  <Route path='/edit-product/:id' element={<EditProduct />} />
+                </Route>
+              </Routes>
+            </div>
+          </div>
+        </Router>
       </div>
     </>
   )

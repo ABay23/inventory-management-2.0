@@ -31,7 +31,7 @@ const getProduct = async (id) => {
   return response.data
 }
 
-//* Get single Product
+//* update  Product
 
 const updateProduct = async (id, formData) => {
   const response = await axios.patch(`${API_URL}${id}`, formData)

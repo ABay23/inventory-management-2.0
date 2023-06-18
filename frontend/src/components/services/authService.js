@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-import React from 'react'
-
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 export const validateEmail = (email) => {
@@ -19,8 +17,9 @@ export const registerUser = async (userData) => {
       userData,
       { withCredentials: true }
     )
-    if (response.statusText === 'OK') {
+    if (response.data) {
       toast.success('User Created Successfully')
+      localStorage.setItem('user', JSON.stringify(response.data))
     }
     return response.data
   } catch (error) {
@@ -39,7 +38,8 @@ export const loginUser = async (userData) => {
       `${BACKEND_URL}/api/users/login`,
       userData
     )
-    if (response.statusText === 'OK') {
+    // if (response.statusText === 'OK')
+    if (response.data) {
       toast.success('Login Successful')
       localStorage.setItem('user', JSON.stringify(response.data))
     }

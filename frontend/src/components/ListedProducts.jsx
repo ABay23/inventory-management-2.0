@@ -24,19 +24,6 @@ const ListedProducts = ({ products }) => {
 
   const dispatch = useDispatch()
 
-  //* Start Pagination
-  const [currentItems, setCurrentItems] = useState([])
-  const [pageCount, setPageCount] = useState(0)
-  const [itemOffset, setItemOffset] = useState(0)
-  const itemsPerPage = 5
-
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage
-
-    setCurrentItems(filteredProducts.slice(itemOffset, endOffset))
-    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage))
-  }, [itemOffset, itemsPerPage, filteredProducts])
-
   //* Delete Products
 
   const delProduct = async (id) => {
@@ -61,11 +48,24 @@ const ListedProducts = ({ products }) => {
     })
   }
 
+  //* Start Pagination
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 8
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage
+
+    setCurrentItems(filteredProducts.slice(itemOffset, endOffset))
+    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage))
+  }, [itemOffset, itemsPerPage, filteredProducts])
+
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % filteredProducts.length
     setItemOffset(newOffset)
   }
-  //* End Pagination
+  //   End Pagination
 
   useEffect(() => {
     dispatch(FILTER_PRODUCTS({ products, search }))
@@ -85,7 +85,7 @@ const ListedProducts = ({ products }) => {
         </div>
       </span>
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-        {filteredProducts.lenght === 0 ? (
+        {filteredProducts.length === 0 ? (
           <p className=' text-md text-blue-600'>No Products Found</p>
         ) : (
           <table className='w-full justify-items-center text-sm text-center text-gray-500 dark:text-gray-500'>
@@ -118,7 +118,7 @@ const ListedProducts = ({ products }) => {
               </tr>
             </thead>
             <tbody>
-              {filteredProducts.map((product, index) => {
+              {currentItems.map((product, index) => {
                 const { _id, name, image, category, price, quantity } = product
 
                 return (
@@ -128,11 +128,17 @@ const ListedProducts = ({ products }) => {
                   >
                     <td className=' px-6 py-3'>{index + 1}</td>
                     <td className='px-6 py-3 '>
-                      <img
-                        src={image.filePath}
-                        alt='pic'
-                        className='object-contain h-14 w-20'
-                      />
+                      {image != null ? (
+                        <img
+                          src={image.filePath}
+                          alt='pic'
+                          className='object-scale-down h-14 w-14'
+                        />
+                      ) : (
+                        <p className=' text-orange-500'>
+                          No Image set for this product
+                        </p>
+                      )}
                     </td>
                     <th
                       scope='row'
@@ -170,7 +176,8 @@ const ListedProducts = ({ products }) => {
           </table>
         )}
       </div>
-      <div className=' ml-96 overflow-x-auto w-max align-middle'>
+      <div className='overflow-x-auto w-max align-middle'>
+        {/* <Items currentItems={currentItems} /> */}
         <ReactPaginate
           breakLabel='...'
           nextLabel='Next'
@@ -179,7 +186,7 @@ const ListedProducts = ({ products }) => {
           pageCount={pageCount}
           previousLabel='Prev'
           renderOnZeroPageCount={null}
-          containerClassName='inline-flex items-center -space-x-px '
+          containerClassName='inline-flex items-center '
           pageLinkClassName='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
           previousLinkClassName='block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
           nextLinkClassName='page-block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'

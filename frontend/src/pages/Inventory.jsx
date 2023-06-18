@@ -16,7 +16,7 @@ const Inventory = () => {
     if (isLoggedIn === true) {
       dispatch(getAllProducts())
     }
-    // console.log(isLoggedIn)
+    console.log(isLoggedIn)
 
     if (isError) {
       console.log(message)
@@ -24,7 +24,7 @@ const Inventory = () => {
   }, [isError, isLoggedIn, message, dispatch])
 
   return (
-    <div className=' mt-40 pl-72 pr-5 z-10 static'>
+    <div className=' mt-40 pl-2 pr-2 z-10 static'>
       <DashboardBox products={products} />
 
       <ListedProducts products={products} />

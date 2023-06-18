@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const { product, isLoading, isError, message } = useSelector(
     (state) => state.product
   )
-  console.log(product)
+  // console.log(product)
 
   const stockStatus = (quantity) => {
     if (quantity > 0) {
@@ -51,29 +51,29 @@ const ProductDetails = () => {
           <h4>Product Availability: </h4>
           <hr />
           <h4>
-            <span className='badge'>Name: </span> &nbsp; {product.name}
+            <span className='badge'>Name: </span> &nbsp; {product?.name}
           </h4>
           <p>
-            <b>&rarr; SKU : </b> {product.sku}
+            <b>&rarr; SKU : </b> {product?.sku}
           </p>
           <p>
-            <b>&rarr; Category : </b> {product.category}
+            <b>&rarr; Category : </b> {product?.category}
           </p>
           <p>
             <b>&rarr; Price : </b> {'$'}
-            {product.price}
+            {product?.price}
           </p>
           <p>
-            <b>&rarr; Quantity in stock : </b> {product.name}
+            <b>&rarr; Quantity in stock : </b> {product?.quantity}
           </p>
           <p>
             <b>&rarr; Total Value in stock : </b> {'$'}
-            {product.price * product.price}
+            {product?.quantity * product?.price}
           </p>
           <hr />
           <div
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(product.description),
+              __html: DOMPurify.sanitize(product?.description),
             }}
           ></div>
         </div>
