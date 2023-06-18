@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+// export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 export const validateEmail = (email) => {
   return email.match(
@@ -12,11 +12,9 @@ export const validateEmail = (email) => {
 //*  Register User
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(
-      `${BACKEND_URL}/api/users/register`,
-      userData,
-      { withCredentials: true }
-    )
+    const response = await axios.post(`/api/users/register`, userData, {
+      withCredentials: true,
+    })
     if (response.data) {
       toast.success('User Created Successfully')
       localStorage.setItem('user', JSON.stringify(response.data))
@@ -34,10 +32,7 @@ export const registerUser = async (userData) => {
 //*  Login User
 export const loginUser = async (userData) => {
   try {
-    const response = await axios.post(
-      `${BACKEND_URL}/api/users/login`,
-      userData
-    )
+    const response = await axios.post(`/api/users/login`, userData)
     // if (response.statusText === 'OK')
     if (response.data) {
       toast.success('Login Successful')
@@ -56,7 +51,7 @@ export const loginUser = async (userData) => {
 //*  Logout User
 export const logOutUser = async () => {
   try {
-    const response = await axios.get(`${BACKEND_URL}/api/users/logout`)
+    const response = await axios.get(`/api/users/logout`)
     localStorage.removeItem('user')
   } catch (error) {
     const message =
