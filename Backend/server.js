@@ -57,9 +57,9 @@ app.use('/api/users', userRoute)
 app.use('/api/products', productRoute)
 app.use('/api/contactus', contactRoute)
 
-app.get('/', (req, res) => {
-  res.send('Home Page')
-})
+// app.get('/', (req, res) => {
+//   res.send('Home Page')
+// })
 
 // Error Handler
 app.use(errorHandler)

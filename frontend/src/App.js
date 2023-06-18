@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
 import AddProduct from './pages/AddProduct'
 import Forgot from './pages/auth/Forgot'
 import Register from './pages/auth/Register'
@@ -15,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import ProductDetails from './components/ProductDetails'
 import PrivateRoute from './components/services/PrivateRoute'
 import EditProduct from './pages/EditProduct'
-import SidebarAction from './components/SidebarAction'
 
 axios.defaults.withCredentials = true
 
