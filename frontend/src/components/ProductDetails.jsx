@@ -34,50 +34,60 @@ const ProductDetails = () => {
   }, [id, isLoggedIn, isError, message, dispatch])
 
   return (
-    <div className=' ml-80 mt-32'>
-      <h2>{id}</h2>
-      <div>
-        {product?.image ? (
-          <img src={product.image.filePath} alt={product.image.fileName} />
-        ) : (
-          <p>No image set for this product</p>
-        )}
+    <div className=' flex flex-col w-screen h-screen bg-gradient-to-br items-center from-gray-600 to-blue-400'>
+      <div className='flex flex-row justify-evenly w-2/3 h-2/3 mx-20 mt-40 bg-gray-500 pt-10 px-4 rounded-xl'>
+        <section className=' h-36 w-52  mt-16'>
+          <h2 className=' text-lg font-bold w-32'>ID: {id}</h2>
+          <div className=' '>
+            {product?.image ? (
+              <img
+                src={product.image.filePath}
+                alt={product.image.fileName}
+                className='object-cover object-center rounded'
+              />
+            ) : (
+              <p className=' text-3xl font-bold text-orange-500'>
+                No image set for this product
+              </p>
+            )}
+          </div>
+        </section>
+        <section className=' mt-16 '>
+          <div className=' py-4 px-4 mx-auto max-w-2xl lg:py-4'>
+            <h2 className='mb-4 text-xl font-bold text-gray-900 dark:text-white'>
+              Product Details
+            </h2>
+            <h4>Product Availability: </h4>
+            <hr />
+            <h4>
+              <span className='badge'>Name: </span> &nbsp; {product?.name}
+            </h4>
+            <p>
+              <b>&rarr; SKU : </b> {product?.sku}
+            </p>
+            <p>
+              <b>&rarr; Category : </b> {product?.category}
+            </p>
+            <p>
+              <b>&rarr; Price : </b> {'$'}
+              {product?.price}
+            </p>
+            <p>
+              <b>&rarr; Quantity in stock : </b> {product?.quantity}
+            </p>
+            <p>
+              <b>&rarr; Total Value in stock : </b> {'$'}
+              {product?.quantity * product?.price}
+            </p>
+            <hr />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(product?.description),
+              }}
+            ></div>
+          </div>
+        </section>
       </div>
-      <section className='bg-white dark:bg-gray-500 mt-20 h-full'>
-        <div className=' py-8 px-4 mx-auto max-w-2xl lg:py-16'>
-          <h2 className='mb-4 text-xl font-bold text-gray-900 dark:text-white'>
-            Add a new product
-          </h2>
-          <h4>Product Availability: </h4>
-          <hr />
-          <h4>
-            <span className='badge'>Name: </span> &nbsp; {product?.name}
-          </h4>
-          <p>
-            <b>&rarr; SKU : </b> {product?.sku}
-          </p>
-          <p>
-            <b>&rarr; Category : </b> {product?.category}
-          </p>
-          <p>
-            <b>&rarr; Price : </b> {'$'}
-            {product?.price}
-          </p>
-          <p>
-            <b>&rarr; Quantity in stock : </b> {product?.quantity}
-          </p>
-          <p>
-            <b>&rarr; Total Value in stock : </b> {'$'}
-            {product?.quantity * product?.price}
-          </p>
-          <hr />
-          <div
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(product?.description),
-            }}
-          ></div>
-        </div>
-      </section>
     </div>
   )
 }

@@ -66,7 +66,7 @@ const AddProduct = () => {
             Add a new product
           </h2>
           <form action='#' className='' onSubmit={saveProduct}>
-            <div className='flex grid gap-4 sm:grid-cols-2 sm:gap-6 my-8'>
+            <div className='grid gap-4 sm:grid-cols-2 sm:gap-6 my-8'>
               <div className='sm:col-span-2'>
                 <label
                   htmlFor='name'
