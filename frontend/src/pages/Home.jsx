@@ -15,8 +15,8 @@ const Home = () => {
             </p>
           </div>
           <div className='flex flex-wrap -m-4'>
-            <div className='xl:w-1/3 md:w-1/2 p-4 h-52'>
-              <div className='border border-gray-700 border-opacity-75 p-6 rounded-lg'>
+            <div className='xl:w-1/3 md:w-1/2 p-4'>
+              <div className='border border-gray-700 border-opacity-75 p-12 rounded-lg'>
                 <div className='w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-blue-400 mb-4'>
                   <svg
                     fill='none'
@@ -35,14 +35,13 @@ const Home = () => {
                 </h2>
                 <p className='leading-relaxed text-base'>
                   Take inventory and set pars from any device. Manage the
-                  details like case size, order amount.
-                  <br />
-                  You can customize the inventory to your needs.
+                  details like case size, order amount. You can customize the
+                  inventory to your needs.
                 </p>
               </div>
             </div>
             <div className='xl:w-1/3 md:w-1/2 p-4'>
-              <div className='border border-gray-700 border-opacity-75 p-6 rounded-lg'>
+              <div className='border border-gray-700 border-opacity-75 p-12 rounded-lg'>
                 <div className='w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-blue-400 mb-4'>
                   <svg
                     fill='none'
@@ -68,8 +67,8 @@ const Home = () => {
                 </p>
               </div>
             </div>
-            <div className='xl:w-1/3 md:w-1/2 p-4'>
-              <div className='border border-gray-700 border-opacity-75 p-6 rounded-lg'>
+            <div className='xl:w-1/3 md:w-1/2  p-4'>
+              <div className='border border-gray-700 border-opacity-75 p-12 rounded-lg'>
                 <div className='w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-blue-400 mb-4'>
                   <svg
                     fill='none'
