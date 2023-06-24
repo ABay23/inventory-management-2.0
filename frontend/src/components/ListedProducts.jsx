@@ -176,7 +176,8 @@ const ListedProducts = ({ products }) => {
           </table>
         )}
       </div>
-      <div className='overflow-x-auto w-max align-middle'>
+
+      <div className='flex flex-row align-middle items-center place-content-center '>
         {/* <Items currentItems={currentItems} /> */}
         <ReactPaginate
           breakLabel='...'
