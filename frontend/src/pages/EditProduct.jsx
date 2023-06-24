@@ -7,6 +7,7 @@ import {
   selectProduct,
   updateProduct,
 } from '../redux/features/product/productSlice'
+import { FaArrowLeft } from 'react-icons/fa'
 
 const EditProduct = () => {
   const { id } = useParams()
@@ -68,6 +69,10 @@ const EditProduct = () => {
     navigate('/inventory')
   }
 
+  const goBack = () => {
+    navigate('/inventory')
+  }
+
   return (
     <div>
       <section className='bg-white dark:bg-gray-500 mt-20 h-full'>
@@ -76,7 +81,7 @@ const EditProduct = () => {
             Add a new product
           </h2>
           <form action='#' className='' onSubmit={saveProduct}>
-            <div className='flex grid gap-4 sm:grid-cols-2 sm:gap-6 my-8'>
+            <div className=' grid gap-4 sm:grid-cols-2 sm:gap-6 my-8'>
               <div className='sm:col-span-2'>
                 <label
                   htmlFor='name'
@@ -231,6 +236,13 @@ const EditProduct = () => {
               // className='inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800'
             >
               Update Product
+            </button>
+            <button
+              className='bg-gray-300 hover:bg-gray-400 text-gray-800 text-sm font-bold py-2 px-4 ml-44 rounded inline-flex items-center'
+              onClick={() => goBack()}
+            >
+              <FaArrowLeft />
+              <span>Back</span>
             </button>
           </form>
         </div>
