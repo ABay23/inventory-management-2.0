@@ -32,7 +32,7 @@ app.use(bodyParser.json())
 // check headers for cors and cookies in the browser console
 app.use((req, res, next) => {
   const cookieHeader = req.headers.cookie
-  console.log('cookieHeader', cookieHeader)
+  // console.log('cookieHeader', cookieHeader)
   res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL)
   res.header('Access-Control-Allow-Credentials', true)
   res.header(
