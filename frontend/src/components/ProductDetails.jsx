@@ -65,7 +65,7 @@ const ProductDetails = () => {
             )}
           </div>
         </section>
-        <section className=' mt-16 '>
+        <section className=' mt-16 ml-4 w-2/4 '>
           <div className=' py-4 px-4 mx-auto max-w-2xl lg:py-4'>
             <h2 className='mb-4 text-xl font-bold text-gray-900 dark:text-white'>
               Product Details
@@ -75,20 +75,20 @@ const ProductDetails = () => {
             <h4>
               <span className=' font-bold text-lg'>Name: {product?.name} </span>
             </h4>
-            <p>
+            <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
               <b>&rarr; SKU : </b> {product?.sku}
             </p>
-            <p>
+            <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
               <b>&rarr; Category : </b> {product?.category}
             </p>
-            <p>
+            <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
               <b>&rarr; Price : </b> {'$'}
               {product?.price}
             </p>
-            <p>
+            <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
               <b>&rarr; Quantity in stock : </b> {product?.quantity}
             </p>
-            <p>
+            <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
               <b>&rarr; Total Value in stock : </b> {'$'}
               {product?.quantity * product?.price}
             </p>
