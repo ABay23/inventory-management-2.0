@@ -86,7 +86,7 @@ const ProductDetails = () => {
               {product?.price}
             </p>
             <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
-              <b>&rarr; Quantity in stock : </b> {product?.quantity}
+              <b>&rarr; Quantity available: </b> {product?.quantity}
             </p>
             <p className=' w-80 bg-blue-400 rounded-md py-1 px-2 my-2'>
               <b>&rarr; Total Value in stock : </b> {'$'}
