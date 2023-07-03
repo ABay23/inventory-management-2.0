@@ -34,6 +34,7 @@ app.use((req, res, next) => {
   const cookieHeader = req.headers.cookie
   // console.log('cookieHeader', cookieHeader)
   res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL)
+  res.header('Access-Control-Allow-Methods', 'PATCH, GET, POST, DELETE')
   res.header('Access-Control-Allow-Credentials', true)
   res.header(
     'Access-Control-Allow-Headers',

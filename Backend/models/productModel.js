@@ -78,6 +78,11 @@ const productSchema = mongoose.Schema(
       required: [true, 'Please add a category'],
       trim: true,
     },
+    vcode: {
+      type: String,
+      required: [true, 'Vendor Product Code'],
+      trim: true,
+    },
     quantity: {
       type: String,
       required: [true, 'Please add a quantity'],

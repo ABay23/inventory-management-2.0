@@ -4,7 +4,7 @@ const { fileSizeFormatter } = require('../utility/fileUpload')
 const cloudinary = require('cloudinary').v2
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, sku, category, price, quantity, description } = req.body
+  const { name, sku, vcode, category, price, quantity, description } = req.body
 
   //* Validation
   if (!name || !category || !price || !description) {
@@ -44,6 +44,7 @@ const createProduct = asyncHandler(async (req, res) => {
     user: req.user.id,
     name,
     sku,
+    vcode,
     category,
     quantity,
     price,
@@ -101,7 +102,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //* Update Product
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, price, quantity, description } = req.body
+  const { name, vcode, category, price, quantity, description } = req.body
 
   const product = await Product.findById(req.params.id)
 
@@ -148,6 +149,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     { _id: req.params.id },
     {
       name,
+      vcode,
       category,
       quantity,
       price,
