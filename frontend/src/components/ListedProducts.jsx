@@ -127,12 +127,13 @@ const ListedProducts = ({ products }) => {
                     className=' text-center bg-white border-b dark:bg-gray-100 dark:border-gray-700'
                   >
                     <td className=' px-6 py-3'>{index + 1}</td>
-                    <td className='px-6 py-3 '>
+
+                    <td className=' h-20 w-36 px-6 py-3 '>
                       {image != null ? (
                         <img
                           src={image.filePath}
                           alt='pic'
-                          className='object-scale-down h-14 w-14'
+                          className='h-20 w-20 object-contain mx-auto'
                         />
                       ) : (
                         <p className=' text-orange-500'>
